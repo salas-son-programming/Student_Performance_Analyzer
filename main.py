@@ -16,6 +16,17 @@ print(f"Mean: {math_mean}")
 print(f"Median: {math_median}")
 print(f"Standard Deviation: {math_std}\n")
 
+# plt.bar(df["math score"].value_counts().index, df["math score"].value_counts().values)
+# plt.grid(axis="y",linestyle="dotted",linewidth=1)
+# plt.grid(axis="x",linestyle="dotted",linewidth=1)
+# plt.title("Math Scores Distribution",fontsize=15,fontweight="bold")
+# plt.xticks(np.arange(0,101,5), rotation="vertical", fontsize=8)
+# plt.yticks(np.arange(0,41,5), rotation="vertical", fontsize=8)
+# plt.xlabel("Students Scores", fontweight="bold")
+# plt.ylabel("Amount of Student", fontweight="bold")
+# plt.subplots_adjust(bottom=0.05,right=0.95,top=0.95,left=0.05)
+# print(df["math score"].value_counts())
+
 read_mean = np.mean(df["reading score"])
 read_median = np.median(df["reading score"])
 read_std = np.std(df["reading score"])
@@ -23,6 +34,17 @@ print("READING SCORE")
 print(f"Mean: {read_mean}")
 print(f"Median: {read_median}")
 print(f"Standard Deviation: {read_std}\n")
+
+# plt.bar(df["reading score"].value_counts().index, df["reading score"].value_counts().values)
+# plt.grid(axis="y",linestyle="dotted",linewidth=1)
+# plt.grid(axis="x",linestyle="dotted",linewidth=1)
+# plt.title("Reading Scores Distribution",fontsize=15,fontweight="bold")
+# plt.xticks(np.arange(0,101,5), rotation="vertical", fontsize=8)
+# plt.yticks(np.arange(0,41,5), rotation="vertical", fontsize=8)
+# plt.xlabel("Students Scores", fontweight="bold")
+# plt.ylabel("Amount of Student", fontweight="bold")
+# plt.subplots_adjust(bottom=0.08,right=0.95,top=0.95,left=0.05)
+# print(df["reading score"].value_counts())
 
 wrt_mean = np.mean(df["writing score"])
 wrt_median = np.median(df["writing score"])
@@ -32,21 +54,71 @@ print(f"Mean: {wrt_mean}")
 print(f"Median: {wrt_median}")
 print(f"Standard Deviation: {wrt_std}\n")
 
+# plt.bar(df["writing score"].value_counts().index, df["writing score"].value_counts().values)
+# plt.grid(axis="y",linestyle="dotted",linewidth=1)
+# plt.grid(axis="x",linestyle="dotted",linewidth=1)
+# plt.title("Writing Scores Distribution",fontsize=15,fontweight="bold")
+# plt.xticks(np.arange(0,101,5), rotation="vertical", fontsize=8)
+# plt.yticks(np.arange(0,41,5), rotation="vertical", fontsize=8)
+# plt.xlabel("Students Scores", fontweight="bold")
+# plt.ylabel("Amount of Student", fontweight="bold")
+# plt.subplots_adjust(bottom=0.08,right=0.95,top=0.95,left=0.05)
+# print(df["writing score"].value_counts())
+
 subjects = [
     "math score",
     "reading score",
     "writing score"
 ]
 best_subject = {
-    "math score": math_mean,
-    "reading score": read_mean,
-    "writing score": wrt_mean,
+    "math": math_mean,
+    "reading": read_mean,
+    "writing": wrt_mean,
 }
+
+
 
 best_mean = max(best_subject.values())
 
-print(f"Best Subject: {best_subject}")
+print(f"Best Subject: {[k for k,v in best_subject.items() if v==best_mean]}")
 print(f"Best Mean: {best_mean}")
+
+# math_counts = df["math score"].value_counts().sort_index()
+# reading_counts = df["reading score"].value_counts().sort_index()
+# writing_counts = df["writing score"].value_counts().sort_index()
+#
+# plt.figure(figsize=(12,6))
+#
+# plt.plot(
+#     math_counts.index,
+#     math_counts.values,
+#     marker="o",
+#     label="Math"
+# )
+#
+# plt.plot(
+#     reading_counts.index,
+#     reading_counts.values,
+#     marker="o",
+#     label="Reading"
+# )
+#
+# plt.plot(
+#     writing_counts.index,
+#     writing_counts.values,
+#     marker="o",
+#     label="Writing"
+# )
+# plt.subplots_adjust(bottom=0.08,right=0.95,top=0.95,left=0.05)
+#
+# plt.title("Score Distribution by Subject", fontweight="bold", fontsize=12)
+# plt.legend()
+# plt.xlabel("Score")
+# plt.ylabel("Number of Students")
+#
+# plt.legend()
+# plt.grid(True)
+
 
 for subject in subjects:
 
@@ -83,6 +155,26 @@ grade_counts = df["Grade"].value_counts()
 
 print(grade_counts)
 
+# colors = [
+# "#E57373" ,  # F - Soft Red
+# "#FFB74D",  # D - Orange
+# "#FFD54F",  # C - Yellow
+# "#66BB6A",  # B - Light Green
+# "#2E8B57",  # A - Sea Green
+# ]
+# plt.pie(grade_counts.values, labels=grade_counts.index, autopct='%1.1f%%', colors=colors)
+# plt.title(
+#     "Grade Distribution of Students",
+#     fontsize=16,
+#     fontweight="bold"
+# )
+#
+# plt.legend(
+#     title="Grades",
+#     loc="upper right"
+# )
+
+
 grade_percentages = (
     df["Grade"]
     .value_counts(normalize=True)
@@ -92,6 +184,8 @@ grade_percentages = (
 for grade, percentage in grade_percentages.items():
 
     print(f"{grade}: {percentage:.1f}%")
+
+
 
 math_reading = np.corrcoef(
     df["math score"],
@@ -123,3 +217,5 @@ if reading_writing > 0.9:
 
 if math_reading > 0.7:
     print("Students who perform well in math often perform well in reading.")
+
+plt.show()
