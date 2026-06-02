@@ -93,3 +93,33 @@ for grade, percentage in grade_percentages.items():
 
     print(f"{grade}: {percentage:.1f}%")
 
+math_reading = np.corrcoef(
+    df["math score"],
+    df["reading score"]
+)[0, 1]
+
+math_writing = np.corrcoef(
+    df["math score"],
+    df["writing score"]
+)[0, 1]
+
+reading_writing = np.corrcoef(
+    df["reading score"],
+    df["writing score"]
+)[0, 1]
+
+print("\nCORRELATION ANALYSIS")
+print("--------------------")
+
+print(f"Math ↔ Reading: {math_reading:.2f}")
+print(f"Math ↔ Writing: {math_writing:.2f}")
+print(f"Reading ↔ Writing: {reading_writing:.2f}")
+
+print("\nINTERPRETATION")
+print("--------------")
+
+if reading_writing > 0.9:
+    print("Students who read well usually write well.")
+
+if math_reading > 0.7:
+    print("Students who perform well in math often perform well in reading.")
