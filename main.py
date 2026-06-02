@@ -37,6 +37,16 @@ subjects = [
     "reading score",
     "writing score"
 ]
+best_subject = {
+    "math score": math_mean,
+    "reading score": read_mean,
+    "writing score": wrt_mean,
+}
+
+best_mean = max(best_subject.values())
+
+print(f"Best Subject: {best_subject}")
+print(f"Best Mean: {best_mean}")
 
 for subject in subjects:
 
@@ -47,4 +57,39 @@ for subject in subjects:
 
     print(f"Highest Score: {highest}")
     print(f"Lowest Score: {lowest}")
+
+
+
+def get_grade(score):
+
+    if score >= 90:
+        return "A"
+
+    elif score >= 80:
+        return "B"
+
+    elif score >= 70:
+        return "C"
+
+    elif score >= 60:
+        return "D"
+
+    else:
+        return "F"
+
+df["Grade"] = df["math score"].apply(get_grade)
+
+grade_counts = df["Grade"].value_counts()
+
+print(grade_counts)
+
+grade_percentages = (
+    df["Grade"]
+    .value_counts(normalize=True)
+    * 100
+)
+
+for grade, percentage in grade_percentages.items():
+
+    print(f"{grade}: {percentage:.1f}%")
 
